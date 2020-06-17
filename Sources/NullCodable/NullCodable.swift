@@ -33,7 +33,7 @@ extension NullCodable: Encodable where Wrapped: Encodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch wrappedValue {
-        case .some(let value): try value.encode(to: encoder)
+        case .some(let value): try container.encode(value)
         case .none: try container.encodeNil()
         }
     }
