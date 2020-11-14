@@ -50,3 +50,11 @@ extension NullCodable: Decodable where Wrapped: Decodable {
 }
 
 extension NullCodable: Equatable where Wrapped: Equatable { }
+
+extension KeyedDecodingContainer {
+    
+    public func decode<Wrapped>(_ type: NullCodable<Wrapped>.Type,
+                                forKey key: KeyedDecodingContainer<K>.Key) throws -> NullCodable<Wrapped> where Wrapped: Decodable {
+        return try decodeIfPresent(NullCodable<Wrapped>.self, forKey: key) ?? NullCodable<Wrapped>(wrappedValue: nil)
+    }
+}

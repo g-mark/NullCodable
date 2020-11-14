@@ -112,6 +112,21 @@ final class NullCodableTests: XCTestCase {
         // then
         XCTAssertEqual(container.test?.a, "a")
         XCTAssertEqual(container.test?.b, 42)
+        
+        // when
+        data = try XCTUnwrap("{}".data(using: .utf8))
+        container = try decoder.decode(Container.self, from: data)
+        
+        // then
+        XCTAssertNil(container.test)
+        
+        // when
+        data = try XCTUnwrap("{\"b\":42}".data(using: .utf8))
+        let test = try decoder.decode(Test.self, from: data)
+        
+        // then
+        XCTAssertNil(test.a)
+        XCTAssertEqual(test.b, 42)
     }
     
     static var allTests = [
