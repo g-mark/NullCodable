@@ -50,6 +50,7 @@ extension NullCodable: Decodable where Wrapped: Decodable {
 }
 
 extension NullCodable: Equatable where Wrapped: Equatable { }
+extension NullCodable: Sendable where Wrapped: Sendable { }
 
 extension KeyedDecodingContainer {
     
